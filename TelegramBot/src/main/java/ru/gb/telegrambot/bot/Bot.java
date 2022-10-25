@@ -1,5 +1,6 @@
 package ru.gb.telegrambot.bot;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import ru.gb.telegrambot.config.BotConfig;
 
 
 @Component
+@Slf4j
 public class Bot extends TelegramLongPollingBot {
 
     final BotConfig config;
@@ -31,9 +33,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        try{
-            if(update.hasMessage() && update.getMessage().hasText())
-            {
+            if (update.hasMessage() && update.getMessage().hasText()) {
                 Message inMess = update.getMessage();//Извлекаем из объекта сообщение пользователя
                 String chatId = inMess.getChatId().toString(); //Достаем из inMess id чата пользователя
                 String response = inMess.getText();//Получаем текст сообщения пользователя, отправляем в написанный нами обработчик
@@ -44,13 +44,14 @@ public class Bot extends TelegramLongPollingBot {
                 outMess.setText(response);
 
                 //Отправка в чат
-                execute(outMess);
+                executeMessage(outMess);
+                log.info("пользователь "+ update.getMessage().getChat().getFirstName() + " написал " + outMess );
             }
-
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
     }
+
+
+
+
 
     @Override
     public String getBotUsername() {
@@ -60,6 +61,15 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return botToken;
+    }
+
+    private void executeMessage(SendMessage message) {
+        try {
+            execute(message);
+
+        } catch (TelegramApiException e) {
+            log.error("Текст ошибки:" + e.getMessage());
+        }
     }
 
 }
