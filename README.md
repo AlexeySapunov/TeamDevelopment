@@ -1,7 +1,3 @@
-<div id="header" align="center">
-  <img src="https://media.giphy.com/media/ya4eevXU490Iw/giphy.gif width="100"/>
-</div>
-
 Telegram bot "TelehabrBot"
 
 Simple Telegram bot on Java / Spring Boot
