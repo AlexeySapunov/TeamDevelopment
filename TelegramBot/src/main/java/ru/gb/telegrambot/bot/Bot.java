@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.gb.telegrambot.bot.keyboards.MyKeyboards;
 import ru.gb.telegrambot.config.BotConfig;
 
 
@@ -17,6 +18,9 @@ import ru.gb.telegrambot.config.BotConfig;
 public class Bot extends TelegramLongPollingBot {
 
     final BotConfig config;
+
+    @Autowired
+    private MyKeyboards myKeyboards;
 
     @Value("${bot.name}")
     private String botUsername;
@@ -34,24 +38,22 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
             if (update.hasMessage() && update.getMessage().hasText()) {
-                Message inMess = update.getMessage();//Извлекаем из объекта сообщение пользователя
-                String chatId = inMess.getChatId().toString(); //Достаем из inMess id чата пользователя
-                String response = inMess.getText();//Получаем текст сообщения пользователя, отправляем в написанный нами обработчик
+                Message message = update.getMessage();//Извлекаем из объекта сообщение пользователя
+                String chatId = message.getChatId().toString(); //Достаем из inMess id чата пользователя
+                String response = message.getText();//Получаем текст сообщения пользователя
                 SendMessage outMess = new SendMessage(); //Создаем объект класса SendMessage - наш будущий ответ пользователю
 
                 //Добавляем в наше сообщение id чата а также наш ответ
                 outMess.setChatId(chatId);
                 outMess.setText(response);
 
+                //включаем клавиатуру главного меню
+                myKeyboards.keyBoardHome(message);
                 //Отправка в чат
-                executeMessage(outMess);
+//                executeMessage(outMess);
                 log.info("пользователь "+ update.getMessage().getChat().getFirstName() + " написал " + outMess );
             }
     }
-
-
-
-
 
     @Override
     public String getBotUsername() {
