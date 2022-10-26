@@ -1,16 +1,19 @@
 package ru.gb.telegrambot.bot;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.gb.telegrambot.bot.keyboards.MyKeyboards;
 import ru.gb.telegrambot.config.BotConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -19,8 +22,6 @@ public class Bot extends TelegramLongPollingBot {
 
     final BotConfig config;
 
-    @Autowired
-    private MyKeyboards myKeyboards;
 
     @Value("${bot.name}")
     private String botUsername;
@@ -31,7 +32,6 @@ public class Bot extends TelegramLongPollingBot {
 
     public Bot(BotConfig config) {
         this.config = config;
-
     }
 
 
@@ -48,11 +48,58 @@ public class Bot extends TelegramLongPollingBot {
                 outMess.setText(response);
 
                 //включаем клавиатуру главного меню
-                myKeyboards.keyBoardHome(message);
+               keyBoardHome(message);
                 //Отправка в чат
 //                executeMessage(outMess);
                 log.info("пользователь "+ update.getMessage().getChat().getFirstName() + " написал " + outMess );
             }
+    }
+
+    public void keyBoardHome (Message message) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.enableMarkdown(true);
+
+        // Создаем клавиатуру
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(false);
+
+        // Создаем список строк клавиатуры
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        // Первая строчка клавиатуры
+        KeyboardRow keyboardFirstRow = new KeyboardRow();
+        // Добавляем кнопки в первую строчку клавиатуры
+        keyboardFirstRow.add("Главная");
+
+        // Вторая строчка клавиатуры
+        KeyboardRow keyboardSecondRow = new KeyboardRow();
+        // Добавляем кнопки во вторую строчку клавиатуры
+        keyboardSecondRow.add("Мобильная разработка");
+        keyboardSecondRow.add("Веб разработка");
+
+        KeyboardRow keyboardThirdRow = new KeyboardRow();
+        // Добавляем кнопки в третью строчку клавиатуры
+        keyboardThirdRow.add("Дизайн");
+        keyboardThirdRow.add("Маркетинг");
+
+        // Добавляем все строчки клавиатуры в список
+        keyboard.add(keyboardFirstRow);
+        keyboard.add(keyboardSecondRow);
+        keyboard.add(keyboardThirdRow);
+        // и устанавливаем этот список нашей клавиатуре
+        replyKeyboardMarkup.setKeyboard(keyboard);
+
+        sendMessage.setChatId(message.getChatId().toString());
+        sendMessage.setReplyToMessageId(message.getMessageId());
+        sendMessage.setText("Выберите действие");
+        try {
+          execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
