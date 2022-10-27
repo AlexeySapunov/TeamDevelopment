@@ -1,6 +1,8 @@
 package ru.gb.telegrambot.bot.keyboards;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -11,11 +13,13 @@ import ru.gb.telegrambot.bot.Bot;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class KeyboardsHome implements Keyboards {
 
 
     private final Bot bot;
 
+    @Lazy
     @Autowired
     public KeyboardsHome(Bot bot) {
         this.bot = bot;
