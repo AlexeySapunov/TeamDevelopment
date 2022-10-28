@@ -1,10 +1,16 @@
 package ru.gb.database.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "like")
+@Table(name = "likes")
 public class Like {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -12,22 +18,16 @@ public class Like {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User sender;
 
-    public User getUser() {
-        return user;
+    @ManyToOne
+    @JoinColumn(name = "user_recipient_id")
+    private User userRecipient;
+
+    @ManyToOne
+    @JoinColumn(name = "publication_recipient_id")
+    private Publication publicationRecipient;
+
+    public Like() {
     }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }

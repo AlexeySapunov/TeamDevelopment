@@ -1,21 +1,42 @@
 package ru.gb.database.model;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Setter
+@Getter
 @Entity
-@Table(name = "notification")
+@Table(name = "notifications")
 public class Notification {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    public Long getId() {
-        return id;
+    @Column(nullable = false)
+    private NotificationStatus status;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User recipient;
+
+    @Column
+    private LocalDateTime dateGetStatus;
+
+    public Notification() {
     }
 
-    public void setId(Long id) {
+    public Notification(Long id, NotificationStatus status, User recipient) {
         this.id = id;
+        this.status = status;
+        this.recipient = recipient;
     }
 
+    private enum NotificationStatus {
+        Blocked, Unblocked, Warn, Info
+    }
 }

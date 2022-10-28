@@ -1,10 +1,16 @@
 package ru.gb.database.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+@Setter
+@Getter
 @Entity
-@Table(name = "message")
+@Table(name = "messages")
 public class Message {
 
     @Id
@@ -12,9 +18,7 @@ public class Message {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "message_publication",
-            joinColumns = @JoinColumn(name = "message_id", referencedColumnName = "publication_id"))
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Publication> publications;
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -27,10 +31,5 @@ public class Message {
     private List<Notification> notifications;
 
     public Message() {
-    }
-
-    public Message(Long id, List<Publication> publications) {
-        this.id = id;
-        this.publications = publications;
     }
 }
