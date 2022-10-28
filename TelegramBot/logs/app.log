@@ -1,0 +1,17 @@
+2022-10-25 17:04:12,412 INFO ru.gb.telegrambot.TelegramBotApplication [main] Starting TelegramBotApplication using Java 11.0.11 on MacBook-Pro-Aleksej.local with PID 22791 (/Users/aleksejleonov/IdeaProjects/TeamDevelopment/TelegramBot/target/classes started by aleksejleonov in /Users/aleksejleonov/IdeaProjects/TeamDevelopment)
+2022-10-25 17:04:12,415 INFO ru.gb.telegrambot.TelegramBotApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-10-25 17:04:14,437 INFO ru.gb.telegrambot.TelegramBotApplication [main] Started TelegramBotApplication in 7.429 seconds (JVM running for 7.983)
+2022-10-25 17:14:04,235 INFO ru.gb.telegrambot.TelegramBotApplication [main] Starting TelegramBotApplication using Java 11.0.11 on MacBook-Pro-Aleksej.local with PID 22880 (/Users/aleksejleonov/IdeaProjects/TeamDevelopment/TelegramBot/target/classes started by aleksejleonov in /Users/aleksejleonov/IdeaProjects/TeamDevelopment)
+2022-10-25 17:14:04,239 INFO ru.gb.telegrambot.TelegramBotApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-10-25 17:14:06,013 INFO ru.gb.telegrambot.TelegramBotApplication [main] Started TelegramBotApplication in 7.111 seconds (JVM running for 7.664)
+2022-10-25 17:14:18,939 INFO ru.gb.telegrambot.bot.Bot [TelehabrBot Telegram Executor] пользователь Алексей написал SendMessage(chatId=232601065, text=Привет, parseMode=null, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=null, entities=null, allowSendingWithoutReply=null, protectContent=null)
+2022-10-25 20:53:11,842 INFO ru.gb.telegrambot.TelegramBotApplication [main] Starting TelegramBotApplication using Java 15.0.1 on DESKTOP with PID 6980 (C:\REPO\TeamDevelopment\TelegramBot\target\classes started by Игорь in C:\REPO\TeamDevelopment)
+2022-10-25 20:53:11,843 INFO ru.gb.telegrambot.TelegramBotApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-10-25 20:53:13,233 INFO ru.gb.telegrambot.TelegramBotApplication [main] Started TelegramBotApplication in 1.73 seconds (JVM running for 2.377)
+2022-10-25 20:53:13,657 INFO ru.gb.telegrambot.bot.Bot [TelehabrBot Telegram Executor] пользователь Игорь написал SendMessage(chatId=696146151, text=ап, parseMode=null, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=null, entities=null, allowSendingWithoutReply=null, protectContent=null)
+2022-10-25 21:07:42,421 INFO ru.gb.telegrambot.TelegramBotApplication [main] Starting TelegramBotApplication using Java 15.0.1 on DESKTOP with PID 13124 (C:\REPO\TeamDevelopment\TelegramBot\target\classes started by Игорь in C:\REPO\TeamDevelopment)
+2022-10-25 21:07:42,423 INFO ru.gb.telegrambot.TelegramBotApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-10-25 21:07:43,702 INFO ru.gb.telegrambot.TelegramBotApplication [main] Started TelegramBotApplication in 1.623 seconds (JVM running for 2.438)
+2022-10-25 21:08:19,940 INFO ru.gb.telegrambot.TelegramBotApplication [main] Starting TelegramBotApplication using Java 11.0.11 on DESKTOP with PID 4452 (C:\REPO\TeamDevelopment\TelegramBot\target\classes started by Игорь in C:\REPO\TeamDevelopment)
+2022-10-25 21:08:19,944 INFO ru.gb.telegrambot.TelegramBotApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-10-25 21:08:21,282 INFO ru.gb.telegrambot.TelegramBotApplication [main] Started TelegramBotApplication in 1.649 seconds (JVM running for 3.615)
