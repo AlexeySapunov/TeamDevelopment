@@ -52,21 +52,13 @@ public class Bot extends TelegramLongPollingBot {
                 String commandIdentifier = message.split(" ")[0].toLowerCase();
                 commandContainer.findCommand(commandIdentifier, username).execute(update);
             } else {
-                SendMessage sendMessage = new SendMessage(); //Создаем объект класса SendMessage - наш будущий ответ пользователю
-                sendMessage.setChatId(update.getMessage().getChatId());
-                sendMessage.setText("Вы ввели неизвестную команду");
-
-                try {
-                    execute(sendMessage);
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
+                String commandIdentifier = message;
+                commandContainer.findCommandButton(commandIdentifier, username).execute(update);
             }
         }
 
 
     }
-
 
 
     @Override

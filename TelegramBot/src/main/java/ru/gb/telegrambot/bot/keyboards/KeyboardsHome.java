@@ -13,6 +13,8 @@ import ru.gb.telegrambot.bot.Bot;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.gb.telegrambot.bot.keyboards.Button.*;
+
 @Component
 public class KeyboardsHome implements Keyboards {
 
@@ -56,10 +58,17 @@ public class KeyboardsHome implements Keyboards {
         keyboardThirdRow.add("Дизайн");
         keyboardThirdRow.add("Маркетинг");
 
+
+        KeyboardRow keyboardFourthRow = new KeyboardRow();
+        // Добавляем кнопки в третью строчку клавиатуры
+        keyboardFourthRow.add(K_HELP.getCommandButtonName());
+
+
         // Добавляем все строчки клавиатуры в список
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);
         keyboard.add(keyboardThirdRow);
+        keyboard.add(keyboardFourthRow);
         // и устанавливаем этот список нашей клавиатуре
         replyKeyboardMarkup.setKeyboard(keyboard);
 
