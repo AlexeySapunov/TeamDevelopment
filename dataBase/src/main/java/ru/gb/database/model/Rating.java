@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Map;
+import java.util.List;
+
 
 @Setter
 @Getter
@@ -18,7 +19,8 @@ public class Rating {
     private Long id;
 
     @Column
-    private Map<Like, Integer> countLikes;
+    @OneToMany
+    private List<Like> countLikes;
 
     @OneToOne
     @JoinColumn(name = "user_id")
