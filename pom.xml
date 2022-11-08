@@ -24,7 +24,7 @@
 
     <modules>
         <module>TelegramBot</module>
-        <module>DataBase</module>
+        <module>dataBase</module>
     </modules>
 
 </project>
