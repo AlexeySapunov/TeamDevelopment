@@ -25,6 +25,7 @@
     <modules>
         <module>TelegramBot</module>
         <module>dataBase</module>
+        <module>backend-api</module>
     </modules>
 
 </project>
