@@ -3,9 +3,9 @@ package ru.gb.telegrambot.bot.keyboards;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public interface Keyboards {
+public interface KeyboardsMain {
 
-    void init(Message message);
+    void init(SendMessage message);
 
 
 }
