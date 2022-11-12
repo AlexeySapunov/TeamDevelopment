@@ -1,6 +1,7 @@
 package ru.gb.database.model;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -29,5 +30,11 @@ public class Like {
     private Publication publicationRecipient;
 
     public Like() {
+
+    }
+    public Like(User sender, User userRecipient, Publication publicationRecipient) {
+        this.sender = sender;
+        this.userRecipient = userRecipient;
+        this.publicationRecipient = publicationRecipient;
     }
 }
