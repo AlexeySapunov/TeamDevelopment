@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.gb.telegrambot.bot.commands.CommandContainer;
+
+import ru.gb.telegrambot.bot.keyboards.KeyboardsMain;
+import ru.gb.telegrambot.bot.service.SendBotMessageServiceImpl;
 import ru.gb.telegrambot.config.BotConfig;
 
 
@@ -17,6 +20,8 @@ import ru.gb.telegrambot.config.BotConfig;
 public class Bot extends TelegramLongPollingBot {
 
     final BotConfig config;
+    public static String COMMAND_PREFIX = "/";
+
 
     @Value("${bot.name}")
     private String botUsername;
@@ -25,32 +30,40 @@ public class Bot extends TelegramLongPollingBot {
     @Value("${bot.token}")
     private String botToken;
 
-    public Bot(BotConfig config) {
+    private final CommandContainer commandContainer;
+
+
+    @Autowired
+    public Bot(BotConfig config, KeyboardsMain keyboards) {
         this.config = config;
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this, keyboards));
+
 
     }
 
 
     @Override
     public void onUpdateReceived(Update update) {
-            if (update.hasMessage() && update.getMessage().hasText()) {
-                Message inMess = update.getMessage();//Извлекаем из объекта сообщение пользователя
-                String chatId = inMess.getChatId().toString(); //Достаем из inMess id чата пользователя
-                String response = inMess.getText();//Получаем текст сообщения пользователя, отправляем в написанный нами обработчик
-                SendMessage outMess = new SendMessage(); //Создаем объект класса SendMessage - наш будущий ответ пользователю
+        int a = 0;
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            String message = update.getMessage().getText().trim();
+            String username = update.getMessage().getFrom().getUserName();
+            String commandIdentifier;
 
-                //Добавляем в наше сообщение id чата а также наш ответ
-                outMess.setChatId(chatId);
-                outMess.setText(response);
-
-                //Отправка в чат
-                executeMessage(outMess);
-                log.info("пользователь "+ update.getMessage().getChat().getFirstName() + " написал " + outMess );
+            if (message.startsWith(COMMAND_PREFIX)) {
+                commandIdentifier = message.split(" ")[0].toLowerCase();
+                commandContainer.findCommand(commandIdentifier, username).execute(update);
+            } else {
+                commandIdentifier = message;
+                commandContainer.findCommand(commandIdentifier, username).execute(update);
             }
+        } else if (update.hasCallbackQuery()) {
+            String commandIdentifier;
+            commandIdentifier = update.getCallbackQuery().getData();
+            commandContainer.findCommand(commandIdentifier).execute(update);
+        }
+
     }
-
-
-
 
 
     @Override
