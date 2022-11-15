@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ru.gb.database.model.Like;
 import ru.gb.database.model.Publication;
+import ru.gb.database.model.User;
 import ru.gb.database.repo.LikeRepository;
 
 import java.util.List;
@@ -56,5 +57,25 @@ public class LikeServerImpl implements LikeService{
                 likeRepository.save(new Like(like.getSender(), like.getUserRecipient(), like.getPublicationRecipient()));
             }
         }
+    }
+
+    @Override
+    public List<Like> findBySender(User sender) {
+        return findBySender(sender.getId());
+    }
+
+    @Override
+    public List<Like> findBySender(Long id) {
+        return likeRepository.findBySender(id);
+    }
+
+    @Override
+    public List<Like> findByUserRecipient(User userRecipient) {
+        return findByUserRecipient(userRecipient.getId());
+    }
+
+    @Override
+    public List<Like> findByUserRecipient(Long id) {
+        return likeRepository.findByUserRecipient(id);
     }
 }

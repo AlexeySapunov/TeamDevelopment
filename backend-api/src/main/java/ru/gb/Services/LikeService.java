@@ -2,6 +2,7 @@ package ru.gb.Services;
 
 import ru.gb.database.model.Like;
 import ru.gb.database.model.Publication;
+import ru.gb.database.model.User;
 
 import java.util.List;
 
@@ -15,4 +16,10 @@ public interface LikeService {
     List<Like> findLikesByPublicationId(Long publicationRecipientId);
 
     void saveOrDelete(Like like);
+
+    List<Like> findBySender(User sender);
+    List<Like> findBySender(Long id);
+
+    List<Like> findByUserRecipient(User userRecipient);
+    List<Like> findByUserRecipient(Long id);
 }
