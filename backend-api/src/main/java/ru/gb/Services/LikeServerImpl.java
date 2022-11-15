@@ -26,18 +26,18 @@ public class LikeServerImpl implements LikeService{
     }
 
     @Override
-    public Like findLikBySenderAndPublicationId(Long senderId, Long publicationRecipientId) {
-        return likeRepository.findBySenderAndPublicationRecipient(senderId, publicationRecipientId);
+    public Like findLikBySenderIdAndPublicationId(Long senderId, Long publicationRecipientId) {
+        return likeRepository.findBySenderIdAndPublicationRecipientId(senderId, publicationRecipientId);
     }
 
     @Override
-    public List<Like> findLikesByPublicationId(Publication publication) {
+    public List<Like> findLikesByPublication(Publication publication) {
         return findLikesByPublicationId(publication.getId());
     }
 
     @Override
     public List<Like> findLikesByPublicationId(Long publicationRecipientId) {
-        return likeRepository.findByPublicationRecipient(publicationRecipientId);
+        return likeRepository.findByPublicationRecipientId(publicationRecipientId);
     }
 
     @Override
@@ -46,9 +46,9 @@ public class LikeServerImpl implements LikeService{
         Like entity = null;
 
         if (like.getSender() != null && like.getPublicationRecipient() != null ) {
-            Like likeSave = likeRepository.findBySenderAndPublicationRecipient(like.getSender().getId(), like.getPublicationRecipient().getId());
+            Like likeSave = likeRepository.findBySenderIdAndPublicationRecipientId(like.getSender().getId(), like.getPublicationRecipient().getId());
 
-            // Лайк от пользователя публикации уже есть, значит это повторное нажатие, то есть попытка оменить лайк, удаляем лайк
+            // Лайк от пользователя у публикации уже есть, значит это повторное нажатие, то есть попытка отменить лайк, удаляем лайк
             // Когда такого лайка нет, то это попытка лайкнуть, сохраняем лайк
             if (likeSave != null) {
                 likeRepository.delete(likeSave);
@@ -61,21 +61,21 @@ public class LikeServerImpl implements LikeService{
 
     @Override
     public List<Like> findBySender(User sender) {
-        return findBySender(sender.getId());
+        return findBySenderId(sender.getId());
     }
 
     @Override
-    public List<Like> findBySender(Long id) {
-        return likeRepository.findBySender(id);
+    public List<Like> findBySenderId(Long id) {
+        return likeRepository.findBySenderId(id);
     }
 
     @Override
     public List<Like> findByUserRecipient(User userRecipient) {
-        return findByUserRecipient(userRecipient.getId());
+        return findByUserRecipientId(userRecipient.getId());
     }
 
     @Override
-    public List<Like> findByUserRecipient(Long id) {
-        return likeRepository.findByUserRecipient(id);
+    public List<Like> findByUserRecipientId(Long id) {
+        return likeRepository.findByUserRecipientId(id);
     }
 }

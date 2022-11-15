@@ -9,17 +9,17 @@ import java.util.List;
 public interface LikeService {
     Like findById(Long id);
 
-    Like findLikBySenderAndPublicationId(Long senderId, Long publicationRecipientId);
+    Like findLikBySenderIdAndPublicationId(Long senderId, Long publicationRecipientId);
 
-    List<Like> findLikesByPublicationId(Publication publication);
+    List<Like> findLikesByPublication(Publication publication);
 
     List<Like> findLikesByPublicationId(Long publicationRecipientId);
 
     void saveOrDelete(Like like);
 
     List<Like> findBySender(User sender);
-    List<Like> findBySender(Long id);
+    List<Like> findBySenderId(Long id);
 
     List<Like> findByUserRecipient(User userRecipient);
-    List<Like> findByUserRecipient(Long id);
+    List<Like> findByUserRecipientId(Long id);
 }
