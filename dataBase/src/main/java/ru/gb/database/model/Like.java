@@ -21,6 +21,8 @@ public class Like {
     @JoinColumn(name = "user_id")
     private User sender;
 
+    // Вопрос!!!
+    // Здесь нам точно нужен получатель лайка? Мы его может вытащить из статьи, он автор.
     @ManyToOne
     @JoinColumn(name = "user_recipient_id")
     private User userRecipient;
