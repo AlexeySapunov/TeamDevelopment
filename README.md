@@ -34,7 +34,7 @@ thoughts.
     ```js 
     git clone https://github.com/AlexeySapunov/TeamDevelopment.git 
     ```
-- Configure the postgresql database per properties 
+- Configure the postgresql database per [properties](https://github.com/AlexeySapunov/TeamDevelopment/blob/master/TelegramBot/src/main/resources/application.properties) 
 
 - Run [docker-compose](https://github.com/AlexeySapunov/TeamDevelopment/blob/master/docker-compose.yaml)
 
