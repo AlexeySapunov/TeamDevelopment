@@ -1,11 +1,11 @@
 
 <div id="header" align="center">
-  <img src="https://3dnews.ru/assets/external/illustrations/2021/02/26/1033659/1.jpg" width="100"/>
+  <img src="https://messenge.ru/wp-content/uploads/2020/04/TBS_Robot.jpg)" width="100"/>
 </div>
 
 <div id="badges" align="center">
   <a href="https://t.me/HabrGB_Bot">
-    <img src="https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Badge"/>
+    <img src="https://img.shields.io/badge/Telegrambot-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Badge"/>
   </a>
 </div>
 
