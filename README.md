@@ -24,6 +24,12 @@ thoughts.
 
 - You need to be a registered Telegram user to start using it
 
+- Following tools are required:
+  - JDK openjdk:11
+  - Spring-boot 2.7.3
+  - Telegrambots 6.1.0
+  - PostgreSQL 14.5
+
 - Use command line:
     ```js 
     git clone https://github.com/AlexeySapunov/TeamDevelopment.git 
