@@ -21,7 +21,7 @@ services:
     
   db:
     container_name: telegrambot
-    image: 'postgres:13.1-alpine'
+    image: 'postgres:14.6-alpine'
     ports:
       - "${DB_PORT}:5432"
     environment:
