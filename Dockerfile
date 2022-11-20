@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:ubi
+FROM openjdk:11-oraclelinux8
 ARG JAR_FILE=target/*.jar
 ENV DB_USERNAME=telegrambot
 ENV DB_PASSWORD=TelegramBot
