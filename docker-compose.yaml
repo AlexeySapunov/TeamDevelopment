@@ -18,14 +18,15 @@ services:
       DB_PORT: 5432
       APP_PORT: ${APP_PORT:?appPortNotProvided}
     restart: unless-stopped
+    
+ db:
+    container_name: telegrambot
+    image: 'postgres:14.6-alpine'
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    restart: unless-stopped
 
-  db:
-      container_name: telegrambot
-      image: 'postgres:14.6-alpine'
-      ports:
-        - "${DB_PORT}:5432"
-      environment:
-        - POSTGRES_USER=${DB_USERNAME}
-        - POSTGRES_PASSWORD=${DB_PASSWORD}
-        - POSTGRES_DB=${DB_NAME}
-      restart: unless-stopped
