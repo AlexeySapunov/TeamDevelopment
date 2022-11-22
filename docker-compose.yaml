@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  TelegramBot:
+    container_name: TelegramBot
+    depends_on:
+      - db
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    build:
+      context: .
+    environment:
+      DB_USERNAME: ${DB_USERNAME:?dbUserNameNotProvided}
+      DB_PASSWORD: ${DB_PASSWORD:?dbPasswordNotProvided}
+      DB_NAME: ${DB_NAME:?dbNameNotProvided}
+      DB_HOST: db
+      DB_PORT: 5432
+      APP_PORT: ${APP_PORT:?appPortNotProvided}
+    restart: unless-stopped
+
+  db:
+      container_name: telegrambot
+      image: 'postgres:14.6-alpine'
+      ports:
+        - "${DB_PORT}:5432"
+      environment:
+        - POSTGRES_USER=${DB_USERNAME}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_DB=${DB_NAME}
+      restart: unless-stopped
