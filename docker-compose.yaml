@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
- TelegramBot:
+  TelegramBot:
     container_name: TelegramBot
     depends_on:
       - db
@@ -29,3 +29,4 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     restart: unless-stopped
+
