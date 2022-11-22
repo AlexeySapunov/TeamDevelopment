@@ -19,7 +19,7 @@ services:
       APP_PORT: ${APP_PORT:?appPortNotProvided}
     restart: unless-stopped
     
-  db:
+ db:
     container_name: telegrambot
     image: 'postgres:14.6-alpine'
     ports:
