@@ -1,11 +1,11 @@
 
 <div id="header" align="center">
-  <img src="https://3dnews.ru/assets/external/illustrations/2021/02/26/1033659/1.jpg" width="100"/>
+  <img src="https://messenge.ru/wp-content/uploads/2020/04/TBS_Robot.jpg)" width="100"/>
 </div>
 
 <div id="badges" align="center">
   <a href="https://t.me/HabrGB_Bot">
-    <img src="https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Badge"/>
+    <img src="https://img.shields.io/badge/Telegrambot-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Badge"/>
   </a>
 </div>
 
@@ -34,6 +34,27 @@ thoughts.
 
 - go to the link: [![Telegram Badge](https://img.shields.io/badge/-telehabrBot-blue?style=flat&logo=Telegram&logoColor=white)](https://t.me/HabrGB_Bot)
   and click /start.
+
+## Application launch:
+
+- You need to be a registered Telegram user to start using it
+
+- Following tools are required:
+  - JDK openjdk:11
+  - Spring-boot 2.7.3
+  - Telegrambots 6.1.0
+  - PostgreSQL 14.5
+
+- Use command line:
+    ```js 
+    git clone https://github.com/AlexeySapunov/TeamDevelopment.git 
+    ```
+- Configure the postgresql database per [properties](https://github.com/AlexeySapunov/TeamDevelopment/blob/master/TelegramBot/src/main/resources/application.properties) 
+
+- Run [docker-compose](https://github.com/AlexeySapunov/TeamDevelopment/blob/master/docker-compose.yaml)
+
+- go to the link: [![Telegram Badge](https://img.shields.io/badge/-telehabrBot-blue?style=flat&logo=Telegram&logoColor=white)](https://t.me/HabrGB_Bot)
+and click /start.
 
 More detailed instructions and navigation on the functionality of the bot in the menu /help.
 
