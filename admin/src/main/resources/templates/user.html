@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header.html :: head">
+</head>
+
+<body>
+
+<nav th:replace="fragments/header.html :: navigation">
+</nav>
+
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12">
+            <a class="btn btn-primary" th:href="@{/users/new}">Add User</a>
+        </div>
+
+        <div class="col-12 mt-3">
+            <form class="form-inline" th:method="get">
+                <div class="form-group mb-2 mr-2">
+                    <label for="usernameFilter" class="sr-only">Username filter</label>
+                    <input type="text" class="form-control" id="usernameFilter" th:value="${param.usernameFilter}"
+                           name="usernameFilter" placeholder="Username filter">
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-2">Apply</button>
+            </form>
+        </div>
+
+        <div class="col-12">
+            <table class="table table-bordered my-2">
+                <thead>
+                <tr>
+                    <th scope="col" th:replace="fragments/sort_header :: sort_header_user ('Id', 'id')"></th>
+                    <th scope="col" th:replace="fragments/sort_header :: sort_header_user ('Username', 'username')"></th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${users.hasContent()}" th:each="user : ${users.content}">
+                    <th scope="row" th:text="${user.id}">1</th>
+                    <td th:text="${user.username}">Alex</td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{/user/{id}(id = ${user.id})}"><i class="fas fa-edit"></i></a>
+                        <form class="d-inline" th:method="delete" th:action="@{/user/{id}(id = ${user.id})}">
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr th:unless="${users.hasContent()}">
+                    <td colspan="4">No data</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div th:replace="fragments/paginator.html :: paginator(${users}, ~{::paginatorLink})">
+            <a th:fragment="paginatorLink" class="page-link"
+               th:text="${num}"
+               th:href="@{/user(page=${num}, size=${data.size},
+               usernameFilter=${param.usernameFilter}, sortField=${param.sortField})}">1</a>
+        </div>
+    </div>
+</div>
+
+<<th:block th:replace="fragments/footer.html :: scripts">
+</th:block>
+
+</body>
+
+</html>
