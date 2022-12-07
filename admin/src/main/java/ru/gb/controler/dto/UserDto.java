@@ -1,4 +1,4 @@
-package ru.gb.dto;
+package ru.gb.controler.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +32,12 @@ public class UserDto {
     public UserDto(Long id, String username) {
         this.id = id;
         this.username = username;
+    }
+
+    public UserDto(Long id, String username, String email, Set<RoleDto> roles) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.roles = roles;
     }
 }

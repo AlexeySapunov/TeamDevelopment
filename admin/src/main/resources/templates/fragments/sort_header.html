@@ -1,0 +1,11 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th scope="col" th:fragment="sort_header_user (header, column)">[[${header}]]
+    <a th:href="@{/user(page=${param.page}, size=${param.size}, usernameFilter=${param.usernameFilter},
+                                sortField=${column})}">
+        <i class="fa fa-sort-down"></i>
+    </a>
+</th>
+
+</html>

@@ -43,7 +43,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "messages_id"))
     private List<Message> messages;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Like> likes;
 
     @ManyToOne
@@ -62,9 +62,10 @@ public class User {
         this.shortDescription = shortDescription;
     }
 
-    public User(Long id, String username, String password, Set<Role> roles) {
+    public User(Long id, String username, String email, String password, Set<Role> roles) {
         this.id = id;
         this.username = username;
+        this.email = email;
         this.password = password;
         this.roles = roles;
     }

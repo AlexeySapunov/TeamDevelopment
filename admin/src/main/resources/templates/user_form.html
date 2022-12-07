@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/header.html :: head">
+</head>
+
+<body>
+
+<nav th:replace="fragments/header.html :: navigation">
+</nav>
+
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12">
+            <form th:action="@{/user}" method="post" th:object="${user}">
+                <input type="hidden" id="id" th:field="*{id}">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" id="name" th:field="*{username}" placeholder="Enter username">
+                    <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" id="email" th:field="*{email}" placeholder="Enter email">
+                    <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter password">
+                    <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Repeat password</label>
+                    <input type="password" class="form-control" id="repeatPassword" th:field="*{repeatPassword}" placeholder="Repeat password">
+                    <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="roles">Roles</label>
+                    <select multiple class="form-control" id="roles" th:field="*{roles}" required>
+                        <option th:each="role : ${roles}"
+                                th:text="${role.name}"
+                                th:value="${role.id} + ';' + ${role.name}"
+                                th:selected="${user.roles?.contains(role)}"></option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/footer.html :: scripts">
+</th:block>
+
+</body>
+
+</html>
