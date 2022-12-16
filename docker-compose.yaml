@@ -19,6 +19,23 @@ services:
       APP_PORT: ${APP_PORT:?appPortNotProvided}
     restart: unless-stopped
 
+  admin:
+    container_name: admin
+    depends_on:
+      - db
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    build:
+      context: .
+    environment:
+      DB_USERNAME: ${DB_USERNAME:?dbUserNameNotProvided}
+      DB_PASSWORD: ${DB_PASSWORD:?dbPasswordNotProvided}
+      DB_NAME: ${DB_NAME:?dbNameNotProvided}
+      DB_HOST: db
+      DB_PORT: 5432
+      APP_PORT: 8080
+    restart: unless-stopped
+
   db:
       container_name: telegrambot
       image: 'postgres:14.6-alpine'
