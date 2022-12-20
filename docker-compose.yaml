@@ -19,7 +19,7 @@ services:
       APP_PORT: ${APP_PORT:?appPortNotProvided}
     restart: unless-stopped
 
- admin:
+  admin:
     container_name: admin
     depends_on:
       - db
