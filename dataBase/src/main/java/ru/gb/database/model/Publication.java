@@ -28,9 +28,10 @@ public class Publication {
     @OneToMany
     private List<Like> likes;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "publication_media",
-            joinColumns = @JoinColumn(name = "publication_id", referencedColumnName = "media_id"))
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "publications_media",
+            joinColumns = @JoinColumn(name = "publications_id"),
+            inverseJoinColumns = @JoinColumn(name = "media_id"))
     private List<Media> media = new ArrayList<>();
 
     @ManyToOne

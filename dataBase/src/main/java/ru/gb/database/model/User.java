@@ -26,10 +26,10 @@ public class User {
     @Column
     private String email;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "roles_id"),
-            inverseJoinColumns = @JoinColumn(name = "NULL", referencedColumnName = "NULL"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     @Column
@@ -38,12 +38,13 @@ public class User {
     @Column
     private String shortDescription;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_messages",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "messages_id"))
-    private List<Message> messages;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_publications",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "publication_id"))
+    private List<Publication> publications;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Like> likes;
 
     @ManyToOne

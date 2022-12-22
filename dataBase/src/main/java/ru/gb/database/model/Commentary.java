@@ -28,9 +28,6 @@ public class Commentary {
     @JoinColumn(name = "user_id")
     private User author;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Publication> recipient;
-
     @Column
     private LocalDateTime commentaryDate;
 

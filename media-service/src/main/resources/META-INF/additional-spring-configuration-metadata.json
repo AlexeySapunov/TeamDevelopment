@@ -1,9 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "picture.storage.path",
-      "type": "java.lang.String",
-      "description": "Description for picture.storage.path."
-    }
-  ]
-}
