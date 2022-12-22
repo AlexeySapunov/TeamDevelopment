@@ -8,4 +8,10 @@
     </a>
 </th>
 
+<th scope="col" th:fragment="sort_header_publication (header, column)">[[${header}]]
+    <a th:href="@{/publication(authorName=${param.authorName}, menuItem=${param.menuItem}, titleFilter=${param.titleFilter}, page=${param.page}, size=${param.size}, sort=${column})}">
+        <i class="fa fa-sort-down"></i>
+    </a>
+</th>
+
 </html>
