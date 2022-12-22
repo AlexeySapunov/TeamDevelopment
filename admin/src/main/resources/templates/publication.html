@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/header.html :: head">
+</head>
+
+<body>
+
+<nav th:replace="fragments/header.html :: navigation">
+</nav>
+
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12">
+            <a class="btn btn-primary" th:href="@{/publication/new}">Add Publication</a>
+        </div>
+
+        <div class="col-12">
+            <form class="form-inline mt-3" method="get">
+                <div class="form-group mb-2 mr-2">
+                    <label for="authorName" class="sr-only">Authors</label>
+                    <select class="form-control" id="authorName" name="authorName">
+                        <option th:selected="${param.authorName == null || param.authorName[0].isBlank()}" value="-1">All Authors</option>
+                        <option th:each="user : ${users}"
+                                th:text="${user.name}"
+                                th:value="${user.id}"
+                                th:selected="${#strings.equals((param.authorName != null ? param.authorName[0] : ''), #strings.toString(user.id))}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-2 mr-2">
+                    <label for="menuItem" class="sr-only">Menu items</label>
+                    <select class="form-control" id="menuItem" name="menuItem">
+                        <option th:selected="${param.menuItem == null || param.menuItem[0].isBlank()}" value="-1">All Menu items</option>
+                        <option th:each="item : ${items}"
+                                th:text="${item}"
+                                th:value="${item}"
+                                th:selected="${#strings.equals((param.menuItem != null ? param.menuItem[0] : ''), #strings.toString(item))}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="title-filter" class="sr-only">Title filter:</label>
+                    <input th:value="${param.titleFilter}" type="text" class="form-control"
+                           name="titleFilter" id="title-filter" placeholder="Title filter">
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-2">Apply</button>
+            </form>
+        </div>
+
+        <div class="col-12">
+            <table class="table table-bordered my-2">
+                <thead>
+                <tr>
+                    <th scope="col" th:replace="fragments/sort_header :: sort_header_publication ('Id', 'id')"></th>
+                    <th scope="col" th:replace="fragments/sort_header :: sort_header_publication ('Title', 'title')"></th>
+                    <th scope="col" th:replace="fragments/sort_header :: sort_header_publication ('User', 'user.name')"></th>
+                    <th scope="col" th:replace="fragments/sort_header :: sort_header_publication ('MenuItem', 'item')"></th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${publications.hasContent()}" th:each="publication: ${publications.content}">
+                    <th scope="row" th:text="${publication.id}">1</th>
+                    <td th:text="${publication.title}">Publication</td>
+                    <td th:text="${publication.user.name}">Author</td>
+                    <td th:text="${publication.item}">Menu item</td>
+                    <td>
+                        <a class="btn btn-success"
+                           th:href="@{/publication/{id}(id = ${publication.id})}"><i class="fas fa-edit"></i></a>
+                        <form class="d-inline"
+                              th:method="delete" th:action="@{/publication/{id}(id = ${publication.id})}">
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr th:unless="${publications.hasContent()}">
+                    <td colspan="5">No data</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div th:replace="fragments/paginator.html :: paginator(${publications}, ~{::paginatorLink})">
+            <a th:fragment="paginatorLink" class="page-link"
+               th:text="${num}"
+               th:href="@{/publication(authorName=${param.authorName}, menuItem=${param.menuItem}, titleFilter=${param.titleFilter}, page=${num}, size=${data.size}, sort=${param.sort})}">1</a>
+        </div>
+    </div>
+</div>
+
+<<th:block th:replace="fragments/footer.html :: scripts">
+</th:block>
+
+</body>
+
+</html>

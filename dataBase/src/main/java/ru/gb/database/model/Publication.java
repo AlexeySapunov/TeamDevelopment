@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -30,7 +31,7 @@ public class Publication {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "publication_media",
             joinColumns = @JoinColumn(name = "publication_id", referencedColumnName = "media_id"))
-    private List<Media> media;
+    private List<Media> media = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -61,7 +62,7 @@ public class Publication {
         this.item = item;
     }
 
-    private enum MenuItem {
+    public enum MenuItem {
         Design, WebDevelopment, MobileDevelopment, Marketing
     }
 }

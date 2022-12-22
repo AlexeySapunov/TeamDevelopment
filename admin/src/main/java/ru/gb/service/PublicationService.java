@@ -1,17 +1,14 @@
 package ru.gb.service;
 
 import org.springframework.data.domain.Page;
-import ru.gb.controler.dto.MenuItem;
 import ru.gb.controler.dto.PublicationDto;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface PublicationService {
 
-    List<PublicationDto> findAll();
-
-    Page<PublicationDto> findWithFilter(MenuItem item);
+    Page<PublicationDto> findAll(Optional<String> authorName, Optional<String> menuItem, Optional<String> titleFilter,
+                                 Integer page, Integer size, String sort);
 
     Optional<PublicationDto> findById(Long id);
 

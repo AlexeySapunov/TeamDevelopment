@@ -28,6 +28,7 @@
         <module>dataBase</module>
         <module>backend-api</module>
         <module>admin</module>
+        <module>media-service</module>
     </modules>
 
     <dependencyManagement>

@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 import ru.gb.database.model.Media;
+import ru.gb.database.model.Publication;
 import ru.gb.database.model.User;
 
 import javax.validation.constraints.NotBlank;
@@ -24,11 +26,21 @@ public class PublicationDto {
     @NotBlank
     private String textMessage;
 
-    private List<Media> media;
+    private MultipartFile[] newMedia;
+
+    private List<Long> media;
 
     @NotBlank
     private User author;
 
     @NotBlank
-    private MenuItem item;
+    private Publication.MenuItem item;
+
+    public PublicationDto(Long id, String title, String textMessage, List<Long> media, Publication.MenuItem item) {
+        this.id = id;
+        this.title = title;
+        this.textMessage = textMessage;
+        this.media = media;
+        this.item = item;
+    }
 }
