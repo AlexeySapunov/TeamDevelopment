@@ -38,9 +38,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Add publication media</label>
-                    <input type="file" class="form-control" id="newMedia" th:field="*{newMedia}"
-                           placeholder="New media" multiple>
+                    <label>Add publication pictures</label>
+                    <input type="file" class="form-control" id="newPicture" th:field="*{newPicture}"
+                           placeholder="New pictures" multiple>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -49,11 +49,11 @@
 
         <div class="container-fluid mt-4">
             <div class="card-columns" style="column-count: 5">
-                <div class="card" th:each="mediaId : ${publication.media}">
-                    <form class="card-header" th:method="delete" th:action="@{/media/{mediaId}(mediaId=${mediaId})}" >
+                <div class="card" th:each="pictureId : ${publication.pictures}">
+                    <form class="card-header" th:method="delete" th:action="@{/pictures/{pictureId}(pictureId=${pictureId})}" >
                         Picture<button class="float-right"><i class="fa fa-times"></i></button>
                     </form>
-                    <img class="card-img-bottom" th:src="@{/media/{mediaId}(mediaId=${mediaId})}"
+                    <img class="card-img-bottom" th:src="@{/pictures/{pictureId}(pictureId=${pictureId})}"
                          width="40%"/>
                 </div>
             </div>

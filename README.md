@@ -41,7 +41,7 @@ thoughts.
   
 - Run [start.sh](https://github.com/AlexeySapunov/TeamDevelopment/blob/master/start.sh); ${...} substitute the desired value from [Dockerfile](https://github.com/AlexeySapunov/TeamDevelopment/blob/master/Dockerfile)
     ```js 
-    bash start.sh ${BRANCH_NAME} DB_USERNAME=${DB_USERNAME} DB_PASSWORD=${DB_PASSWORD} DB_NAME=${DB_NAME} DB_PORT=${DB_PORT} APP_PORT=${APP_PORT} 
+    bash start.sh master DB_USERNAME=${DB_USERNAME} DB_PASSWORD=${DB_PASSWORD} DB_NAME=${DB_NAME} DB_PORT=${DB_PORT} APP_PORT=${APP_PORT} 
     ```
 
 - Go to the link: [![Telegram Badge](https://img.shields.io/badge/-telehabrBot-blue?style=flat&logo=Telegram&logoColor=white)](https://t.me/HabrGB_Bot)

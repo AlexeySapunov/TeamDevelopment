@@ -1,8 +1,8 @@
 package ru.gb.service;
 
 import org.springframework.data.domain.Page;
-import ru.gb.controler.dto.UserDto;
-import ru.gb.controler.dto.UserListParams;
+import ru.gb.dto.UserDto;
+import ru.gb.dto.UserListParams;
 
 import java.util.List;
 import java.util.Optional;
