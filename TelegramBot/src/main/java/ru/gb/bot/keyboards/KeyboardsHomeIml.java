@@ -42,11 +42,9 @@ public class KeyboardsHomeIml implements KeyboardsMain {
         keyboardThirdRow.add(Button.K_DESIGN_SECTION.getCommandButtonName());
         keyboardThirdRow.add(Button.K_MARKETING_SECTION.getCommandButtonName());
 
-
         KeyboardRow keyboardFourthRow = new KeyboardRow();
         // Добавляем кнопки в третью строчку клавиатуры
         keyboardFourthRow.add(Button.K_HELP.getCommandButtonName());
-
 
         // Добавляем все строчки клавиатуры в список
         keyboard.add(keyboardFirstRow);
@@ -55,8 +53,5 @@ public class KeyboardsHomeIml implements KeyboardsMain {
         keyboard.add(keyboardFourthRow);
         // и устанавливаем этот список нашей клавиатуре
         replyKeyboardMarkup.setKeyboard(keyboard);
-
     }
-
-
 }

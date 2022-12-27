@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 import ru.gb.model.Publication;
 
 import java.io.Serializable;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -23,7 +23,22 @@ public class BackendPublicationDto implements Serializable {
 
     private String textMessage;
 
+    private MultipartFile[] newPicture;
+
     private List<Long> pictures;
 
     private Publication.MenuItem item;
+
+    public BackendPublicationDto(Long id, String title, String textMessage, List<Long> pictures, Publication.MenuItem item) {
+        this.id = id;
+        this.title = title;
+        this.textMessage = textMessage;
+        this.pictures = pictures;
+        this.item = item;
+    }
+
+    public BackendPublicationDto(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
 }

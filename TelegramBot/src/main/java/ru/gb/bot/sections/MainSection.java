@@ -4,7 +4,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class MainSection {
     public MainSection() {
-
     }
 
     private String text;

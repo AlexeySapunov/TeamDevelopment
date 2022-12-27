@@ -11,4 +11,6 @@ public interface BackendPublicationService {
                                         Integer page, Integer size, String sort);
 
     Optional<BackendPublicationDto> findById(Long id);
+
+    void save(BackendPublicationDto publication);
 }

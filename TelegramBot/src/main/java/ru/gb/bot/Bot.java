@@ -13,6 +13,8 @@ import ru.gb.bot.commands.CommandContainer;
 import ru.gb.bot.keyboards.KeyboardsMain;
 import ru.gb.bot.service.SendBotMessageServiceImpl;
 import ru.gb.config.BotConfig;
+import ru.gb.service.BackendPublicationService;
+import ru.gb.service.BackendUserService;
 
 
 @Component
@@ -34,11 +36,9 @@ public class Bot extends TelegramLongPollingBot {
 
 
     @Autowired
-    public Bot(BotConfig config, KeyboardsMain keyboards) {
+    public Bot(BotConfig config, BackendPublicationService publicationService, KeyboardsMain keyboards, BackendUserService userService) {
         this.config = config;
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this, keyboards));
-
-
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this, keyboards), publicationService, userService);
     }
 
 
@@ -62,9 +62,7 @@ public class Bot extends TelegramLongPollingBot {
             commandIdentifier = update.getCallbackQuery().getData();
             commandContainer.findCommand(commandIdentifier).execute(update);
         }
-
     }
-
 
     @Override
     public String getBotUsername() {
@@ -79,11 +77,9 @@ public class Bot extends TelegramLongPollingBot {
     private void executeMessage(SendMessage message) {
         try {
             execute(message);
-
         } catch (TelegramApiException e) {
             log.error("Текст ошибки:" + e.getMessage());
         }
     }
-
 }
 

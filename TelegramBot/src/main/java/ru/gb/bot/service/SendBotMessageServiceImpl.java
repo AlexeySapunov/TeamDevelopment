@@ -24,7 +24,8 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
 
     @Override
     public void sendMessage(Long chatId, String message) {
-        SendMessage sendMessage = new SendMessage(); //Создаем объект класса SendMessage - наш будущий ответ пользователю
+        //Создаем объект класса SendMessage - наш будущий ответ пользователю
+        SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(message);
         keyboards.init(sendMessage);
@@ -39,7 +40,8 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
 
     @Override
     public void sendMessage(Long chatId, String message, InlineKeyboardMarkup inlineKeyboardMarkup) {
-        SendMessage sendMessage = new SendMessage(); //Создаем объект класса SendMessage - наш будущий ответ пользователю
+        //Создаем объект класса SendMessage - наш будущий ответ пользователю
+        SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(message);
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
@@ -59,6 +61,4 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
             e.printStackTrace();
         }
     }
-
-
 }

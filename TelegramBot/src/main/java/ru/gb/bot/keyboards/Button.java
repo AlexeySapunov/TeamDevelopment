@@ -15,12 +15,6 @@ public enum Button {
     K_MARKETING_SECTION("Маркетинг"),
     K_DESIGN_SECTION("Дизайн"),
 
-
-
-
-
-
-
     K_DRIVER_CABINET("Кабинет автора"),
     K_WRITE_AUTHOR("Написать автору"),
     K_ABOUT_AS("О нас"),
@@ -28,7 +22,6 @@ public enum Button {
     K_BACK ("⬅ Назад");
 
     private final String commandButtonName;
-
 
     Button(String commandButtonName) {
         this.commandButtonName = commandButtonName;

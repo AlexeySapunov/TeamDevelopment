@@ -6,12 +6,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import ru.gb.controller.NotFoundException;
 import ru.gb.dto.BackendPublicationDto;
 import ru.gb.model.Picture;
 import ru.gb.model.Publication;
 import ru.gb.repo.PublicationRepository;
 import ru.gb.repo.PublicationSpecification;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -19,10 +22,12 @@ import java.util.stream.Collectors;
 public class BackendPublicationServiceImpl implements BackendPublicationService {
 
     private final PublicationRepository publicationRepository;
+    private final PictureService pictureService;
 
     @Autowired
-    public BackendPublicationServiceImpl(PublicationRepository publicationRepository) {
+    public BackendPublicationServiceImpl(PublicationRepository publicationRepository, PictureService pictureService) {
         this.publicationRepository = publicationRepository;
+        this.pictureService = pictureService;
     }
 
     @Override
@@ -50,6 +55,31 @@ public class BackendPublicationServiceImpl implements BackendPublicationService 
     public Optional<BackendPublicationDto> findById(Long id) {
         return publicationRepository.findById(id)
                 .map(BackendPublicationServiceImpl::convertToDto);
+    }
+
+    @Override
+    public void save(BackendPublicationDto publicationDto) {
+        Publication publication = (publicationDto.getId() != null) ? publicationRepository.findById(publicationDto.getId())
+                .orElseThrow(() -> new NotFoundException("")) : new Publication();
+
+        publication.setTitle(publicationDto.getTitle());
+        publication.setTextMessage(publicationDto.getTextMessage());
+
+        if (publicationDto.getNewPicture() != null) {
+            for (MultipartFile newPicture: publicationDto.getNewPicture()) {
+                try {
+                    publication.getPictures().add(new Picture(null,
+                            newPicture.getOriginalFilename(),
+                            newPicture.getContentType(),
+                            pictureService.createPicture(newPicture.getBytes()),
+                            publication));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+
+        publicationRepository.save(publication);
     }
 
     private static BackendPublicationDto convertToDto(Publication publication) {
